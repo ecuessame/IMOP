@@ -2181,19 +2181,13 @@ function saveToLocalStorage() {
 
 loadFromLocalStorage();
 
-// 1. Función para cambiar entre tu App y las Alertas
 function switchTab(tab) {
-    // 1. Esconder ambas as secções forçadamente
     document.getElementById('main-section').style.display = 'none';
-    document.getElementById('alerts-section').style.display = 'none';
-    
-    // 2. Tirar destaque dos botões
+    document.getElementById('alerts-section').style.display = 'none';  
     document.querySelectorAll('.tab-switch').forEach(btn => btn.classList.remove('active'));
     
-    // 3. Mostrar apenas a que foi clicada e destacar o botão
     if (tab === 'main') {
         document.getElementById('main-section').style.display = 'block'; 
-        // Nota: Se usavas flex aqui antes, muda 'block' para 'flex'
     } else {
         document.getElementById('alerts-section').style.display = 'block';
     }
@@ -2201,7 +2195,6 @@ function switchTab(tab) {
     document.getElementById('tab-' + tab).classList.add('active');
 }
 
-// 2. Guardar Alerta (Crear o Editar)
 function saveAlert() {
     const type = document.getElementById('alert-type').value.trim();
     const location = document.getElementById('alert-location').value.trim().toUpperCase();
@@ -2212,10 +2205,7 @@ function saveAlert() {
         return;
     }
 
-    // Como ahora la edición se hace en el card, aquí solo creamos nuevos
     alertsList.push({ type, location, notes });
-
-    // Limpiar formulario de arriba
     document.getElementById('alert-type').value = '';
     document.getElementById('alert-location').value = '';
     document.getElementById('alert-notes').value = '';
@@ -2225,7 +2215,6 @@ function saveAlert() {
     renderSummary();
 }
 
-// 3. Renderizar las Tarjetas
 function renderAlerts() {
     const container = document.getElementById('alerts-container');
     container.innerHTML = '';
@@ -2234,7 +2223,6 @@ function renderAlerts() {
         const card = document.createElement('div');
         card.className = 'alert-card-container';
         
-        // SI ESTE CARD ESTÁ EN MODO EDICIÓN:
         if (currentlyEditingIndex === index) {
     card.innerHTML = `
         <div class="alert-card-content">
